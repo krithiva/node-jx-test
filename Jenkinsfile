@@ -93,7 +93,7 @@ pipeline {
         steps {
           container('nodejs') {
             // ensure we're not on a detached head
-            sh "git checkout origin/feature"
+            sh "git checkout master"
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
@@ -103,7 +103,6 @@ pipeline {
             sh "git add version_node.txt"
             sh "git commit -m \"added version file\""
             sh "git push"
-
           }
         }
       }
