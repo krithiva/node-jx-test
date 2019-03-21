@@ -82,30 +82,12 @@ pipeline {
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+            sh "docker tag $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)  gcr.io/lloyds-open-banking-199331/$APP_NAME:\$(cat VERSION)"
+            sh "docker push gcr.io/lloyds-open-banking-199331/$APP_NAME:\$(cat VERSION)"
           }
         }
       }
   
-     stage('Update version') {
-        steps {
-          container('nodejs') {
-            // ensure we're not on a detached head
-            sh "git pull"
-            sh "git checkout -b feature"
-            sh "git config --global credential.helper store"
-
-            sh "jx step git credentials"
-            // so we can retrieve the version in later steps
-            sh "echo version"
-            sh "echo \$(cat VERSION) >>version_node.txt"
-            sh "git add version_node.txt"
-            sh "git commit -m \"added version file\""
-            sh "git push --set-upstream origin feature"
-          }
-        }
-      }
-
-
 
       stage('Promote to Environments') {
         when {
