@@ -93,6 +93,7 @@ pipeline {
             container('nodejs') {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // release the helm chart
+              // update version file
               sh 'jx step helm release'
               sh "echo 0.0.4 >>version_node.txt"
               sh "git add version_node.txt"
