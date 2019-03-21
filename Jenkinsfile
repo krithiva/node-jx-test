@@ -95,7 +95,7 @@ pipeline {
               // release the helm chart
               // update version file
               sh 'jx step helm release'
-              sh "echo 0.0.4 >>version_node.txt"
+              sh "echo \$(cat ../../VERSION)  >>version_node.txt"
               sh "git add version_node.txt"
               sh "git commit -m \"added version file\""
               sh "git push"
