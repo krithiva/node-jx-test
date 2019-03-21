@@ -98,7 +98,7 @@ pipeline {
 
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
-              sh "echo \$DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION) >version_node.txt"
+              sh "echo 0.0.3 >>version_node.txt"
               sh "git add version_node.txt"
               sh "git commit -m \"added version file\""
               sh "git push"
