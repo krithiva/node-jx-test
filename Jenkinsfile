@@ -100,7 +100,7 @@ pipeline {
             sh "echo \$(cat VERSION) >>version_node.txt"
             sh "git add version_node.txt"
             sh "git commit -m \"added version file\""
-            sh "git push"
+            sh "git push --set-upstream origin feature"
           }
         }
       }
