@@ -93,8 +93,7 @@ pipeline {
           dir ('./charts/node-http-demo1') {
             container('nodejs') {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
-              // release the helm chart
-              sh "echo \$(cat ../../VERSION)  >>version_node.txt"
+              sh "echo \$VERSION  >>version_node.txt"
               sh "git add version_node.txt"
               sh "git commit -m \"added version file\""
               sh "git push"
