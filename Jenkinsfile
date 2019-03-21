@@ -94,12 +94,11 @@ pipeline {
             container('nodejs') {
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
               // release the helm chart
-              // update version file
-              sh 'jx step helm release'
               sh "echo \$(cat ../../VERSION)  >>version_node.txt"
               sh "git add version_node.txt"
               sh "git commit -m \"added version file\""
               sh "git push"
+              sh 'jx step helm release'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
             }
