@@ -94,9 +94,8 @@ pipeline {
             container('nodejs') {
               sh "echo version"
               sh "echo $VERSION version dollar"
-              sh 'echo \$(cat ../../VERSION) >>version_node.txt'
+              sh "echo \$(cat ../../VERSION) >>version_node.txt"
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
-              sh "echo \$VERSION  >>version_node.txt"
               sh "git add version_node.txt"
               sh "git commit -m \"added version file\""
               sh "git push"
