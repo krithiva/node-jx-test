@@ -100,7 +100,7 @@ pipeline {
               sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
               sh "echo \$DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION) >version_node.txt"
               sh "git add version_node.txt"
-              sh "git commit -m "added version file"
+              sh "git commit -m \"added version file\""
               sh "git push"
             }
           }
