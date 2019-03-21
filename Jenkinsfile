@@ -82,8 +82,24 @@ pipeline {
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+          }
+        }
+      }
+  
+     stage('Update version') {
+        when {
+          branch 'master'
+        }
+        steps {
+          container('nodejs') {
+            // ensure we're not on a detached head
+            sh "git checkout feature"
+            sh "git config --global credential.helper store"
+
+            sh "jx step git credentials"
+            // so we can retrieve the version in later steps
             sh "echo version"
-            sh "echo \$(cat VERSION) >>version_node.txt"  
+            sh "echo \$(cat VERSION) >>version_node.txt"
             sh "git add version_node.txt"
             sh "git commit -m \"added version file\""
             sh "git push"
@@ -91,6 +107,9 @@ pipeline {
           }
         }
       }
+
+
+
       stage('Promote to Environments') {
         when {
           branch 'master'
