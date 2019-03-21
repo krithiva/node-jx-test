@@ -82,6 +82,12 @@ pipeline {
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+            sh "echo version"
+            sh "echo \$(cat VERSION) >>version_node.txt"  
+            sh "git add version_node.txt"
+            sh "git commit -m \"added version file\""
+            sh "git push"
+
           }
         }
       }
@@ -92,13 +98,7 @@ pipeline {
         steps {
           dir ('./charts/node-http-demo1') {
             container('nodejs') {
-              sh "echo version"
-              sh "echo $VERSION version dollar"
-              sh "echo \$(cat ../../VERSION) >>version_node.txt"
               sh 'jx step changelog --version v\$(cat ../../VERSION)'
-              sh "git add version_node.txt"
-              sh "git commit -m \"added version file\""
-              sh "git push"
               sh 'jx step helm release'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
