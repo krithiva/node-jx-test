@@ -87,13 +87,10 @@ pipeline {
       }
   
      stage('Update version') {
-        when {
-          branch 'master'
-        }
         steps {
           container('nodejs') {
             // ensure we're not on a detached head
-            sh "git checkout master"
+            sh "git checkout origin/feature"
             sh "git config --global credential.helper store"
 
             sh "jx step git credentials"
