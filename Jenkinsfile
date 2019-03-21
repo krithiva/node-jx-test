@@ -38,6 +38,7 @@ pipeline {
       }
        stage('Test') {
             steps {
+   // sonar test
               container('nodejs') {
                sh "npm install"
                sh "node . &"
