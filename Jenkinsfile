@@ -84,7 +84,7 @@ pipeline {
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
             sh "docker tag $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)  krithiva/$APP_NAME:\$(cat VERSION)"
             sh "export DOCKER_USERNAME=krithiva"
-            sh "export DOCKER_PASSWORD=gopal@123"
+            sh "export DOCKER_PASSWORD=twinkle123"
             sh "docker login -u=\$DOCKER_USERNAME -p=\$DOCKER_PASSWORD"
             sh "docker push krithiva/$APP_NAME:\$(cat VERSION)"
           }
