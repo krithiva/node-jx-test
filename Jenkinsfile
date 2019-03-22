@@ -82,8 +82,8 @@ pipeline {
             sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
 
             sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
-            sh "docker tag $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)  gcr.io/lloyds-open-banking-199331/$APP_NAME:\$(cat VERSION)"
-            sh "docker push gcr.io/lloyds-open-banking-199331/$APP_NAME:\$(cat VERSION)"
+            sh "docker tag $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)  krithiva/$APP_NAME:\$(cat VERSION)"
+            sh "docker push krithiva/$APP_NAME:\$(cat VERSION)"
           }
         }
       }
