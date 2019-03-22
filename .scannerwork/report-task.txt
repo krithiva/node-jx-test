@@ -2,5 +2,5 @@ projectKey=node-http-demo1
 serverUrl=http://35.224.62.117:9000
 serverVersion=7.6.0.21501
 dashboardUrl=http://35.224.62.117:9000/dashboard?id=node-http-demo1
-ceTaskId=AWmf6iuezl6u7eiGSjg5
-ceTaskUrl=http://35.224.62.117:9000/api/ce/task?id=AWmf6iuezl6u7eiGSjg5
+ceTaskId=AWmkvzimzl6u7eiGSjhS
+ceTaskUrl=http://35.224.62.117:9000/api/ce/task?id=AWmkvzimzl6u7eiGSjhS
