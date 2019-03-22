@@ -4,7 +4,7 @@
 replicaCount: 1
 image:
   repository: 10.27.255.124:5000/krithiva/node-http-demo1
-  tag: 0.0.15
+  tag: 0.0.22
   pullPolicy: IfNotPresent
 service:
   name: node-http-demo1
