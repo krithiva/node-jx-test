@@ -88,17 +88,13 @@ pipeline {
           }
         }
       }
-  
-
-      stage('Promote to Environments') {
+     stage('Promote to Environments') {
         when {
           branch 'master'
         }
         steps {
           dir ('./charts/node-http-demo1') {
             container('nodejs') {
-              sh 'jx step changelog --version v\$(cat ../../VERSION)'
-              //sh 'jx step helm release'
               // promote through all 'Auto' promotion Environments
               sh 'jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION)'
             }
